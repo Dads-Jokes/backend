@@ -3,21 +3,18 @@
 module.exports = {
   development: {
     client: "pg",
-    connection: {
-      filename: "./dev.sqlite3"
-    },
+    connection: "postgres://localhost/dadjokesdb",
     useNullAsDefault: true,
     migrations: {
       directory: "./database/migrations"
     },
     seeds: {
       directory: "./database/seeds"
-    },
-    pool: {
-      afterCreate: function(connection, done) {
-        connection.run("PRAGMA foreign_keys = ON", done);
-      }
     }
+    // pool: {
+    //   afterCreate: function(connection, done) {
+    //     connection.run("PRAGMA foreign_keys = ON", done);
+    //   }
   },
 
   production: {
