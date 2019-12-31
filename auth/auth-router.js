@@ -9,12 +9,15 @@ router.post("/register", (req, res) => {
   let user = req.body;
   const hash = bcrypt.hashSync(user.password, 10);
   user.password = hash;
+  console.log("Adding...: " + user);
 
   Users.add(user)
     .then(saved => {
+      console.log("Saved: " + saved);
       res.status(201).json(saved);
     })
     .catch(error => {
+      console.log("Error: " + error);
       res.status(500).json(error);
     });
 });
