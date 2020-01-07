@@ -1,15 +1,17 @@
 const db = require("../database/dbConfig.js");
 
 module.exports = {
-  add
-  //   find,
+  add,
+  find
   //   findBy,
   //   findById
 };
 
-// function find() {
-//   return db("users").select("id", "username", "password");
-// }
+function find() {
+  return db("jokes")
+    .select("question", "answer", "user_id")
+    .where("private", false);
+}
 
 // function findBy(filter) {
 //   return db("users").where(filter);

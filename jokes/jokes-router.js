@@ -20,4 +20,15 @@ router.post("/create/:id", auth, (req, res) => {
     });
 });
 
+router.get("/", (req, res) => {
+  Jokes.find()
+    .then(jokes => {
+      res.status(201).json(jokes);
+    })
+    .catch(error => {
+      console.log("Error: " + error);
+      res.status(500).json(error);
+    });
+});
+
 module.exports = router;
