@@ -6,10 +6,12 @@ const secrets = require("../config/secrets");
 const Jokes = require("../jokes/jokes-model.js");
 const auth = require("../auth/authenticate-middleware.js");
 
-router.post("/create", auth, (req, res) => {
+router.post("/create/:id", auth, (req, res) => {
   let joke = req.body;
+
   Jokes.add({ joke })
     .then(createdJoke => {
+      joke.user_id = req.params;
       res.status(201).json(createdJoke);
     })
     .catch(error => {
