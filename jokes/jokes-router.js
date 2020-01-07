@@ -9,7 +9,7 @@ const auth = require("../auth/authenticate-middleware.js");
 router.post("/create/:id", auth, (req, res) => {
   let joke = req.body;
 
-  Jokes.add({ joke })
+  Jokes.add(joke)
     .then(createdJoke => {
       joke.user_id = req.params.id;
       res.status(201).json(createdJoke);
