@@ -11,7 +11,7 @@ router.post("/create/:id", auth, (req, res) => {
 
   Jokes.add({ joke })
     .then(createdJoke => {
-      joke.user_id = req.params;
+      joke.user_id = req.params.id;
       res.status(201).json(createdJoke);
     })
     .catch(error => {
