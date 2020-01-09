@@ -33,7 +33,8 @@ router.post("/login", (req, res) => {
 
         res.status(200).json({
           message: `Welcome ${user.username}!`,
-          token: token
+          token: token,
+          user_id: user.id
         });
       } else {
         res.status(401).json({ message: "You Shall Not Pass!" });

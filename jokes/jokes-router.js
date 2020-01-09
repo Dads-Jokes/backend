@@ -33,6 +33,7 @@ router.get("/", (req, res) => {
 
 router.get("/byuser/:id", auth, (req, res) => {
   let userID = req.params.id;
+
   Jokes.findByUser(userID)
     .then(jokes => {
       res.status(201).json(jokes);
