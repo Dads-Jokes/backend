@@ -31,6 +31,18 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/byuser/:id", auth, (req, res) => {
+  let userID = req.params.id;
+  Jokes.findByUser(userID)
+    .then(jokes => {
+      res.status(201).json(jokes);
+    })
+    .catch(error => {
+      console.log("Error: " + error);
+      res.status(500).json(error);
+    });
+});
+
 router.delete("/delete/:id", auth, (req, res) => {
   let jokeID = req.params.id;
 
