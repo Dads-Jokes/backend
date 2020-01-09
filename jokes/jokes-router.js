@@ -38,7 +38,7 @@ router.delete("/delete/:id", auth, (req, res) => {
     .then(joke => {
       console.log(joke);
       if (joke) {
-        res.status(201).json({ deleted: joke });
+        res.status(201).json({ deleted: "joke deleted" });
       } else {
         res.status(404).json({ message: "invalid joke id" });
       }
