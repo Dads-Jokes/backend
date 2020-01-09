@@ -10,7 +10,7 @@ module.exports = {
 
 function find() {
   return db("jokes")
-    .select("question", "answer", "user_id")
+    .select("id", "question", "answer", "user_id")
     .where("private", false);
 }
 
