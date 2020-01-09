@@ -2,7 +2,8 @@ const db = require("../database/dbConfig.js");
 
 module.exports = {
   add,
-  find
+  find,
+  deleteJoke
   //   findBy,
   //   findById
 };
@@ -21,6 +22,12 @@ async function add(joke) {
   return await db("jokes")
     .insert(joke)
     .returning("*");
+}
+
+async function deleteJoke(jokeID) {
+  db("jokes")
+    .where({ jokeID })
+    .del();
 }
 
 // function findById(id) {

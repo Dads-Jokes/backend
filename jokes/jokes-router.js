@@ -31,4 +31,21 @@ router.get("/", (req, res) => {
     });
 });
 
+router.post("/delete/:id", auth, (req, res) => {
+  let jokeID = req.params.id;
+
+  Jokes.deleteJoke(jokeID)
+    .then(joke => {
+      if (joke) {
+        res.status(201).json({ deleted: joke });
+      } else {
+        res.status(404).json({ message: "invalid joke id" });
+      }
+    })
+    .catch(error => {
+      console.log("Error: " + error);
+      res.status(500).json(error);
+    });
+});
+
 module.exports = router;
