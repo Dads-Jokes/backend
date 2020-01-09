@@ -26,7 +26,7 @@ async function add(joke) {
 
 async function deleteJoke(jokeID) {
   db("jokes")
-    .where({ jokeID })
+    .where("id", "=", 7)
     .del();
 }
 
