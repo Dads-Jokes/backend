@@ -25,7 +25,7 @@ async function add(joke) {
 }
 
 async function deleteJoke(jokeID) {
-  db("jokes")
+  return await db("jokes")
     .where("id", jokeID)
     .del();
 }
