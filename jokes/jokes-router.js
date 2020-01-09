@@ -31,7 +31,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.post("/delete/:id", auth, (req, res) => {
+router.delete("/delete/:id", auth, (req, res) => {
   let jokeID = req.params.id;
 
   Jokes.deleteJoke(jokeID)
