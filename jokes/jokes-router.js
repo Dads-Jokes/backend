@@ -36,6 +36,7 @@ router.post("/delete/:id", auth, (req, res) => {
 
   Jokes.deleteJoke(jokeID)
     .then(joke => {
+      console.log(joke);
       if (joke) {
         res.status(201).json({ deleted: joke });
       } else {
