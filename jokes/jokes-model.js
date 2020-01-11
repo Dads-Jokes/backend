@@ -31,7 +31,8 @@ async function add(joke) {
 async function editJoke(jokeID, jokeChanges) {
   return await db("jokes")
     .where("id", jokeID)
-    .update(jokeChanges);
+    .update(jokeChanges)
+    .returning("*");
 }
 
 async function deleteJoke(jokeID) {
