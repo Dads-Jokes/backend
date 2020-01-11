@@ -20,6 +20,19 @@ router.post("/create/:id", auth, (req, res) => {
     });
 });
 
+router.put("/edit/:id", auth, (req, res) => {
+  let jokeChanges = req.body;
+
+  Jokes.editJoke(req.params.id, jokeChanges)
+    .then(changedJoke => {
+      res.status(201).json(changedJoke);
+    })
+    .catch(error => {
+      console.log("Error: " + error);
+      res.status(500).json(error);
+    });
+});
+
 router.get("/", (req, res) => {
   Jokes.find()
     .then(jokes => {

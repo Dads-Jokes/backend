@@ -4,6 +4,7 @@ module.exports = {
   add,
   find,
   findByUser,
+  editJoke,
   deleteJoke
   //   findBy,
   //   findById
@@ -25,6 +26,12 @@ async function add(joke) {
   return await db("jokes")
     .insert(joke)
     .returning("*");
+}
+
+async function editJoke(jokeID, jokeChanges) {
+  return await db("jokes")
+    .where("id", jokeID)
+    .update(jokeChanges);
 }
 
 async function deleteJoke(jokeID) {
