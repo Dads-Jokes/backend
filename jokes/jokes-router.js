@@ -28,7 +28,7 @@ router.put("/edit/:id", auth, (req, res) => {
   Jokes.editJoke(req.params.id, jokeChanges)
     .then(changedJoke => {
       console.log(changedJoke);
-      res.status(201).json({ changedJoke });
+      res.status(201).json(changedJoke);
     })
     .catch(error => {
       console.log("Error: " + error);
