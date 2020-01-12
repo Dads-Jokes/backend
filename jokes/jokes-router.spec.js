@@ -56,7 +56,11 @@ describe("Create a Joke", () => {
     await db.raw("TRUNCATE users, users RESTART IDENTITY CASCADE");
     await request(server)
       .post("/api/auth/register")
-      .send({ username: "CodyCaro", password: "password" });
+      .send({
+        username: "CodyCaro",
+        password: "password",
+        email: "cody@cody.com"
+      });
 
     const res = await request(server)
       .post("/api/auth/login")
