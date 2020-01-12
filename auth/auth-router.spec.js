@@ -49,6 +49,8 @@ describe("log in", () => {
       .post("/api/auth/login")
       .send({ username: "testUser", password: "password" });
 
+    testToken = res.body.token;
+    userID = res.body.user_id;
     expect(res.status).toBe(200);
   });
 
