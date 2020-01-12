@@ -3,10 +3,18 @@ const db = require("../database/dbConfig");
 const request = require("supertest");
 
 describe("register user", () => {
+  beforeEach(async () => {
+    await db.raw("TRUNCATE users, users RESTART IDENTITY CASCADE");
+  });
+
   it("should register user", async () => {
     const res = await request(server)
       .post("/api/auth/register")
-      .send({ username: "CodyCaro", password: "password" });
+      .send({
+        username: "testUser",
+        password: "password",
+        email: "test@test.com"
+      });
 
     expect(res.status).toBe(201);
   });
@@ -14,25 +22,32 @@ describe("register user", () => {
   it("should return a json object", async () => {
     const res = await request(server)
       .post("/api/auth/register")
-      .send({ username: "CodyCaro", password: "password" });
+      .send({
+        username: "testUser",
+        password: "password",
+        email: "test@test.com"
+      });
 
     expect(res.type).toBe("application/json");
-  });
-
-  beforeEach(async () => {
-    await db("users").truncate();
   });
 });
 
 describe("log in", () => {
+  beforeEach(async () => {
+    await db.raw("TRUNCATE users, users RESTART IDENTITY CASCADE");
+  });
   it("should find the user upon login", async () => {
     await request(server)
       .post("/api/auth/register")
-      .send({ username: "CodyCaro", password: "password" });
+      .send({
+        username: "testUser",
+        password: "password",
+        email: "test@test.com"
+      });
 
     const res = await request(server)
       .post("/api/auth/login")
-      .send({ username: "CodyCaro", password: "password" });
+      .send({ username: "testUser", password: "password" });
 
     expect(res.status).toBe(200);
   });
@@ -40,16 +55,17 @@ describe("log in", () => {
   it("should return a token to user", async () => {
     await request(server)
       .post("/api/auth/register")
-      .send({ username: "CodyCaro", password: "password" });
+      .send({
+        username: "testUser",
+        password: "password",
+        email: "test@test.com"
+      });
 
     const res = await request(server)
       .post("/api/auth/login")
-      .send({ username: "CodyCaro", password: "password" });
+      .send({ username: "testUser", password: "password" });
 
+    console.log(res.body);
     expect(res.body.token).toBeDefined();
-  });
-
-  beforeEach(async () => {
-    await db("users").truncate();
   });
 });

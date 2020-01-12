@@ -19,17 +19,18 @@ module.exports = {
 
   test: {
     client: "pg",
-    connection: process.env.DATABASE_URL,
-    pool: {
-      min: 2,
-      max: 10
-    },
+    connection: "postgres://localhost/dadjokesdb",
+    useNullAsDefault: true,
     migrations: {
       directory: "./database/migrations"
     },
     seeds: {
       directory: "./database/seeds"
     }
+    // pool: {
+    //   afterCreate: function(connection, done) {
+    //     connection.run("PRAGMA foreign_keys = ON", done);
+    //   }
   },
 
   production: {
